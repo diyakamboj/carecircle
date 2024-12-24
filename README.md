@@ -2,14 +2,11 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Shadcn-ui](https://img.shields.io/badge/Shadcn--ui-000000?style=for-the-badge&logo=shadcn&logoColor=white)
 ![Zod](https://img.shields.io/badge/Zod-000000?style=for-the-badge&logo=zod&logoColor=white)
-![Zustand](https://img.shields.io/badge/Zustand-000000?style=for-the-badge&logo=zustand&logoColor=white)
 ![Nuqs](https://img.shields.io/badge/Nuqs-000000?style=for-the-badge&logo=nuqs&logoColor=white)
-![Auth.js](https://img.shields.io/badge/Auth.js-000000?style=for-the-badge&logo=auth0&logoColor=white)
 ![Tanstack Tables](https://img.shields.io/badge/Tanstack_Tables-000000?style=for-the-badge&logo=tanstack&logoColor=white)
 ![React Hook Form](https://img.shields.io/badge/React_Hook_Form-000000?style=for-the-badge&logo=reacthookform&logoColor=white)
 ![kbar](https://img.shields.io/badge/kbar-000000?style=for-the-badge&logo=kbar&logoColor=white)
 ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)
-![Husky](https://img.shields.io/badge/Husky-000000?style=for-the-badge&logo=husky&logoColor=white)
 ![Prettier](https://img.shields.io/badge/Prettier-000000?style=for-the-badge&logo=prettier&logoColor=white)
 
 # CareCircle - Maternity Support Chat
@@ -52,30 +49,24 @@ This is a starter template using the following stack:
 - Styling - [Tailwind CSS](https://tailwindcss.com)
 - Components - [Shadcn-ui](https://ui.shadcn.com)
 - Schema Validations - [Zod](https://zod.dev)
-- State Management - [Zustand](https://zustand-demo.pmnd.rs)
 - Search params state manager - [Nuqs](https://nuqs.47ng.com/)
-- Auth - [Auth.js](https://authjs.dev/)
 - Tables - [Tanstack Tables](https://ui.shadcn.com/docs/components/data-table)
 - Real-time Communication - [Socket.io](https://socket.io)
-- HTTP Requests - [Axios](https://axios-http.com)
-- Encryption - [Crypto-js](https://cryptojs.gitbook.io/docs/)
-- JSON Web Tokens - [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
-- Backend Server - [Express](https://expressjs.com)
 
-## Getting Started
+## Contributors
 
-To get started with CareCircle, follow these steps:
+1. **Diya Kamboj** - Diya
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-username/carecircle.git
-   cd carecircle
-   ```
+1. **Tejasri** - Diya
+
+1. **Ananya Kamboj** - Diya
+
+## Phase - 2
+- aa
+- aa
 
 ## Pages
-
-| Pages | Specifications |
-| :---- | -------------- |
+Here is page structure of CareCircle app.
 
 ```plaintext
 .
