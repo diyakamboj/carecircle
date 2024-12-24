@@ -55,11 +55,11 @@ This is a starter template using the following stack:
 
 ## Contributors
 
-1. **Diya Kamboj** - Diya
+1. **Diya Kamboj** - Set up the overall project structure and created the Figma design to establish a strong foundation for the project. 
 
-1. **Tejasri** - Diya
+1. **Tejasri** - Helped set up the project structure and worked on the Figma design, contributing to the project's initial setup and planning.
 
-1. **Ananya Kamboj** - Diya
+1. **Ananya Kamboj** - Ananya is 3rd year student of Bachelor of Software Engineer in Thompson Rivers University and ramping currently on AI, ML, LLM and NextJs. I have contributed in upgrading the webapp to use Shadcn UI.
 
 ## Phase - 2
 - aa
