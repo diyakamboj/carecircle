@@ -2,7 +2,7 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { ChatSession } from '@/constants/data';
 import { cn } from '@/lib/utils';
-import { buttonVariants } from '@/components/ui/button';
+
 
 type ColumnsProps = {
   handleOpenChat: (customerName: string, sessionId: string) => void;

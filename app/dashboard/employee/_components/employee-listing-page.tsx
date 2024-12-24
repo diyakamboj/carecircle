@@ -1,11 +1,11 @@
 import PageContainer from '@/components/layout/page-container';
-import { buttonVariants } from '@/components/ui/button';
+
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
 import { Employee } from '@/constants/data';
 import { fakeUsers } from '@/constants/mock-api';
 import { searchParamsCache } from '@/lib/searchparams';
-import { cn } from '@/lib/utils';
+
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
 import EmployeeTable from './employee-tables';

@@ -1,11 +1,9 @@
 import PageContainer from '@/components/layout/page-container';
-import { buttonVariants } from '@/components/ui/button';
+
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
 import { fakeEmails } from '@/constants/mock-api';
-import { cn } from '@/lib/utils';
-import { Mail } from 'lucide-react';
-import Link from 'next/link';
+
 
 type TMailListingPage = {};
 
