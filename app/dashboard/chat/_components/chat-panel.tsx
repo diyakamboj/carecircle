@@ -134,7 +134,7 @@ export default function CollapsiblePanel({
             placeholder="Type a message..."
           />
           <button
-            className="rounded bg-blue-500 p-2 text-white"
+            className="rounded bg-theme p-2 text-white"
             onClick={() => handleSendMessage('agent', messageText)}
           >
             Send
@@ -162,7 +162,7 @@ export default function CollapsiblePanel({
               onClick={() =>
                 handleSendMessage('agent', 'Hello! How can I assist you today?')
               }
-              className="flex items-center rounded bg-yellow-500 p-1 text-xs text-white"
+              className="flex items-center rounded bg-theme p-1 text-xs text-white"
             >
               <Info className="mr-1 h-4 w-4" /> Greet Customer
             </button>
@@ -173,7 +173,7 @@ export default function CollapsiblePanel({
                   'Please hold on while I check that for you.'
                 )
               }
-              className="flex items-center rounded bg-yellow-500 p-1 text-xs text-white"
+              className="flex items-center rounded bg-theme p-1 text-xs text-white"
             >
               <Clock className="mr-1 h-4 w-4" /> Hold Message
             </button>
@@ -181,7 +181,7 @@ export default function CollapsiblePanel({
               onClick={() =>
                 handleSendMessage('agent', 'Goodbye! Have a great day!')
               }
-              className="flex items-center rounded bg-yellow-500 p-1 text-xs text-white"
+              className="flex items-center rounded bg-theme p-1 text-xs text-white"
             >
               <LogOut className="mr-1 h-4 w-4" /> Bye Message
             </button>
