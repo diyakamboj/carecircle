@@ -24,7 +24,7 @@ Some key features of the CareCircle app consist of:
 
 ## Technologies
 
-This is the technology stack we used to build CareCircle:
+This is the technology stack we used to build CareCircle website:
 
 - Framework - [Next.js 14](https://nextjs.org/13)
 - Language - [TypeScript](https://www.typescriptlang.org)
