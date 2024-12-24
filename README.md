@@ -1,36 +1,128 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Shadcn-ui](https://img.shields.io/badge/Shadcn--ui-000000?style=for-the-badge&logo=shadcn&logoColor=white)
+![Zod](https://img.shields.io/badge/Zod-000000?style=for-the-badge&logo=zod&logoColor=white)
+![Zustand](https://img.shields.io/badge/Zustand-000000?style=for-the-badge&logo=zustand&logoColor=white)
+![Nuqs](https://img.shields.io/badge/Nuqs-000000?style=for-the-badge&logo=nuqs&logoColor=white)
+![Auth.js](https://img.shields.io/badge/Auth.js-000000?style=for-the-badge&logo=auth0&logoColor=white)
+![Tanstack Tables](https://img.shields.io/badge/Tanstack_Tables-000000?style=for-the-badge&logo=tanstack&logoColor=white)
+![React Hook Form](https://img.shields.io/badge/React_Hook_Form-000000?style=for-the-badge&logo=reacthookform&logoColor=white)
+![kbar](https://img.shields.io/badge/kbar-000000?style=for-the-badge&logo=kbar&logoColor=white)
+![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)
+![Husky](https://img.shields.io/badge/Husky-000000?style=for-the-badge&logo=husky&logoColor=white)
+![Prettier](https://img.shields.io/badge/Prettier-000000?style=for-the-badge&logo=prettier&logoColor=white)
+
+# CareCircle - Maternity Support Chat
+
+## Overview
+
+CareCircle is a free and open-source maternity support chat application designed to assist pregnant women with their queries and provide support. The application features a chat interface where users can interact with support agents and an AI-based chatbot to get timely assistance.
+
+### Context
+
+Expecting mothers have a bewildering but mission-critical experience before them. Infant mortality is still one of the leading causes of unnecessary deaths worldwide. While “Obstetricians” are the licensed doctors who oversee the maternity journey, there are actually many professionals that must collaborate and communicate about and with an expecting mother.
+
+### Challenge
+
+Design and/or prototype a mobile application and/or text message thread manager that enables thoughtful support, discussion, and case management around an expecting mother that can be used in “low resource environments”.
+
+### Ideas
+
+- **Web-based Admin View**: A web-based admin view that shows aggregate text messages and group text conversations around a team that supports an expecting mother.
+- **Mobile Application**: A mobile application, similar to WhatsApp or Telegram, that is optimized for those around the world who cannot afford expensive mobile lines or data plans.
+- **Data Privacy and Security**: Like any other healthcare application with legal guidelines on data privacy and security, either have a plan to address them or -- even better -- build it into the application!
+
+### Features
+
+The CareCircle application includes:
+
+- **Real-time Chat**: Connect with support agents in real-time to get immediate assistance.
+- **AI Chatbot**: Access an AI-powered chatbot for quick answers to frequently asked questions.
+- **Pregnancy Tracking**: Track pregnancy progress and milestones with personalized updates.
+- **User Profiles**: Maintain detailed user profiles to provide personalized support.
+- **Interaction History**: Keep a record of all interactions to ensure continuity and context in support sessions.
+- **Analytics**: Monitor chat metrics, response times, and user satisfaction to improve service quality.
+
+## Technologies
+
+This is a starter template using the following stack:
+
+- Framework - [Next.js 14](https://nextjs.org/13)
+- Language - [TypeScript](https://www.typescriptlang.org)
+- Styling - [Tailwind CSS](https://tailwindcss.com)
+- Components - [Shadcn-ui](https://ui.shadcn.com)
+- Schema Validations - [Zod](https://zod.dev)
+- State Management - [Zustand](https://zustand-demo.pmnd.rs)
+- Search params state manager - [Nuqs](https://nuqs.47ng.com/)
+- Auth - [Auth.js](https://authjs.dev/)
+- Tables - [Tanstack Tables](https://ui.shadcn.com/docs/components/data-table)
+- Real-time Communication - [Socket.io](https://socket.io)
+- HTTP Requests - [Axios](https://axios-http.com)
+- Encryption - [Crypto-js](https://cryptojs.gitbook.io/docs/)
+- JSON Web Tokens - [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
+- Backend Server - [Express](https://expressjs.com)
 
 ## Getting Started
 
-First, run the development server:
+To get started with CareCircle, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/your-username/carecircle.git
+   cd carecircle
+   ```
+
+## Pages
+
+| Pages | Specifications |
+| :---- | -------------- |
+
+```plaintext
+.
+├── app
+│   ├── (auth)
+│   │   ├── _components
+│   │   │   ├── user-auth-form.tsx
+│   │   │   └── sigin-view.tsx
+│   │   └── (signin)
+│   │       └── page.tsx
+│   ├── dashboard
+│   │   ├── _components
+│   │   │   ├── overview.tsx
+│   │   │   └── recent-sales.tsx
+│   │   └── page.tsx
+│   └── layout.tsx
+├── components
+│   ├── date-range-picker.tsx
+│   ├── icons.tsx
+│   ├── layout
+│   │   ├── app-sidebar.tsx
+│   │   └── page-container.tsx
+│   └── ui (shadcn ui components)
+│       ├── button.tsx
+│       ├── card.tsx
+│       └── tabs.tsx
+├── constants
+│   └── index.ts
+├── context
+│   └── auth-context.js
+├── firebase
+│   ├── config.ts
+│   └── firebase.ts
+├── hooks
+│   └── useAuth.ts
+├── lib
+│   └── utils.ts
+├── types
+│   └── index.ts
+├── styles
+│   └── globals.css
+├── .env
+├── README.md
+└── package.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Explanation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Project Structure**: Added a `Project Structure` section that outlines the directory structure of the project. This helps users understand the organization of the project files and directories.
+2. **Technologies Section**: Kept the technologies section with badges as it is.
