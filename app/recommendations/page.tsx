@@ -4,7 +4,7 @@ import { RecommendationsPage } from '@/components/recommendations/Recommendation
 const mockRecommendations = [
   {
     id: '1',
-    doctorName: 'Dr. Smith',
+    doctorName: 'Dr. Brody',
     specialization: 'Cardiologist',
     title: 'Heart Health Checkup Results',
     attachment: {
