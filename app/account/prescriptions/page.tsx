@@ -1,5 +1,6 @@
-import { mockPatientProfile } from '@/constants/mock-data';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+'use client';
+
+import { Card } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -7,55 +8,66 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
+} from "@/components/ui/table";
+
+// Mock data for prescriptions
+const prescriptions = [
+  {
+    id: "rx-001",
+    medicationName: "Prenatal Vitamins",
+    prescribedBy: "Dr. Emily Chen",
+    date: "2024-03-15",
+    dosage: "1 tablet daily",
+    notes: "Take with food"
+  },
+  {
+    id: "rx-002",
+    medicationName: "Iron Supplements",
+    prescribedBy: "Dr. Emily Chen",
+    date: "2024-03-15",
+    dosage: "1 tablet twice daily",
+    notes: "Take on empty stomach"
+  },
+  {
+    id: "rx-003",
+    medicationName: "Folic Acid",
+    prescribedBy: "Dr. Emily Chen",
+    date: "2024-03-10",
+    dosage: "400mcg daily",
+    notes: "Essential for fetal development"
+  }
+];
 
 export default function PrescriptionsPage() {
-  const { prescriptions } = mockPatientProfile;
-
   return (
-    <div className="container mx-auto py-8 px-4">
-      <div className="mb-6">
-        <Link href="/account">
-          <Button variant="ghost" className="gap-2">
-            <ArrowLeft className="h-4 w-4" />
-            Back to Account
-          </Button>
-        </Link>
-      </div>
-
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-6">My Prescriptions</h1>
+      
       <Card>
-        <CardHeader>
-          <CardTitle>My Prescriptions</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Medication Name</TableHead>
-                <TableHead>Prescribed By</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Dosage</TableHead>
-                <TableHead>Notes</TableHead>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Medication Name</TableHead>
+              <TableHead>Prescribed By</TableHead>
+              <TableHead>Date</TableHead>
+              <TableHead>Dosage</TableHead>
+              <TableHead>Notes</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {prescriptions.map((prescription) => (
+              <TableRow key={prescription.id}>
+                <TableCell className="font-medium">
+                  {prescription.medicationName}
+                </TableCell>
+                <TableCell>{prescription.prescribedBy}</TableCell>
+                <TableCell>{new Date(prescription.date).toLocaleDateString()}</TableCell>
+                <TableCell>{prescription.dosage}</TableCell>
+                <TableCell>{prescription.notes}</TableCell>
               </TableRow>
-            </TableHeader>
-            <TableBody>
-              {prescriptions.map((prescription) => (
-                <TableRow key={prescription.id}>
-                  <TableCell className="font-medium">
-                    {prescription.medicationName}
-                  </TableCell>
-                  <TableCell>{prescription.prescribedBy}</TableCell>
-                  <TableCell>{prescription.date}</TableCell>
-                  <TableCell>{prescription.dosage}</TableCell>
-                  <TableCell>{prescription.notes}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
+            ))}
+          </TableBody>
+        </Table>
       </Card>
     </div>
   );

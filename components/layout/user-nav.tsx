@@ -8,15 +8,16 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { useAuthContext } from '@/context/auth-context';
 import { useLogout } from '@/firebase/firebase';
+import { useRouter } from 'next/navigation';
 
 export function UserNav() {
   const { user } = useAuthContext();
   const { logout } = useLogout();
+  const router = useRouter();
 
   if (user) {
     return (
@@ -45,24 +46,19 @@ export function UserNav() {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem>
-              Profile
-              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+            <DropdownMenuItem onClick={() => router.push('/account')}>
+              My Account
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              Billing
-              <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+            <DropdownMenuItem onClick={() => router.push('/account/privacy')}>
+              Privacy Settings
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              Settings
-              <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+            <DropdownMenuItem onClick={() => router.push('/account/chat-settings')}>
+              Chat Settings
             </DropdownMenuItem>
-            <DropdownMenuItem>New Team</DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={logout}>
-            Log out
-            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+            Log Out
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

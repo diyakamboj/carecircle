@@ -1,5 +1,7 @@
-import { mockPatientProfile } from '@/constants/mock-data';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+'use client';
+
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -7,86 +9,117 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { Button } from '@/components/ui/button';
-import { ArrowLeft, Download, Upload } from 'lucide-react';
-import Link from 'next/link';
+} from "@/components/ui/table";
+import { Download, Upload } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
+
+// Mock data for lab reports
+const initialReports = [
+  {
+    id: "lab-001",
+    fileName: "Blood Work Results.pdf",
+    uploadedBy: "Dr. Emily Chen",
+    date: "2024-03-10",
+    notes: "Routine pregnancy blood work"
+  },
+  {
+    id: "lab-002",
+    fileName: "Glucose Test.pdf",
+    uploadedBy: "Dr. Michael Ross",
+    date: "2024-03-05",
+    notes: "Gestational diabetes screening"
+  },
+  {
+    id: "lab-003",
+    fileName: "Ultrasound Report.pdf",
+    uploadedBy: "Dr. Emily Chen",
+    date: "2024-02-28",
+    notes: "20-week anatomy scan"
+  }
+];
 
 export default function LabReportsPage() {
-  const { labReports } = mockPatientProfile;
+  const [reports, setReports] = useState(initialReports);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // This is a mock implementation. In a real application, you would:
-    // 1. Get the file from event.target.files[0]
-    // 2. Upload it to your server/storage
-    // 3. Update the lab reports list
-    console.log('File upload triggered', event.target.files);
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // In a real app, you would upload the file to your storage service here
+    const newReport = {
+      id: `lab-${Date.now()}`,
+      fileName: file.name,
+      uploadedBy: "Patient Upload",
+      date: new Date().toISOString().split('T')[0],
+      notes: "Patient uploaded report"
+    };
+
+    setReports([newReport, ...reports]);
+    toast.success("File uploaded successfully!");
+  };
+
+  const handleDownload = (fileName: string) => {
+    // In a real app, this would trigger the actual file download
+    toast.success(`Downloading ${fileName}...`);
   };
 
   return (
-    <div className="container mx-auto py-8 px-4">
-      <div className="mb-6 flex justify-between items-center">
-        <Link href="/account">
-          <Button variant="ghost" className="gap-2">
-            <ArrowLeft className="h-4 w-4" />
-            Back to Account
-          </Button>
-        </Link>
-
-        <div className="flex items-center gap-2">
+    <div className="container mx-auto p-4">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">My Lab Reports</h1>
+        <div>
           <input
             type="file"
             id="file-upload"
             className="hidden"
-            accept=".pdf,.jpg,.jpeg,.png"
+            accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
             onChange={handleFileUpload}
           />
           <label htmlFor="file-upload">
-            <Button variant="outline" className="gap-2" asChild>
-              <span>
-                <Upload className="h-4 w-4" />
-                Upload New Report
-              </span>
+            <Button className="gap-2">
+              <Upload className="h-4 w-4" />
+              Upload Report
             </Button>
           </label>
         </div>
       </div>
-
+      
       <Card>
-        <CardHeader>
-          <CardTitle>My Lab Reports</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>File Name</TableHead>
-                <TableHead>Uploaded By</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Notes</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>File Name</TableHead>
+              <TableHead>Uploaded By</TableHead>
+              <TableHead>Date</TableHead>
+              <TableHead>Notes</TableHead>
+              <TableHead>Action</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {reports.map((report) => (
+              <TableRow key={report.id}>
+                <TableCell className="font-medium">
+                  {report.fileName}
+                </TableCell>
+                <TableCell>{report.uploadedBy}</TableCell>
+                <TableCell>{new Date(report.date).toLocaleDateString()}</TableCell>
+                <TableCell>{report.notes}</TableCell>
+                <TableCell>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    className="gap-2"
+                    onClick={() => handleDownload(report.fileName)}
+                  >
+                    <Download className="h-4 w-4" />
+                    Download
+                  </Button>
+                </TableCell>
               </TableRow>
-            </TableHeader>
-            <TableBody>
-              {labReports.map((report) => (
-                <TableRow key={report.id}>
-                  <TableCell className="font-medium">
-                    {report.fileName}
-                  </TableCell>
-                  <TableCell>{report.uploadedBy}</TableCell>
-                  <TableCell>{report.date}</TableCell>
-                  <TableCell>{report.notes}</TableCell>
-                  <TableCell className="text-right">
-                    <Button size="sm" variant="ghost" className="gap-2">
-                      <Download className="h-4 w-4" />
-                      Download
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
+            ))}
+          </TableBody>
+        </Table>
       </Card>
     </div>
   );

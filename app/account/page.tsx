@@ -1,174 +1,142 @@
-import { mockPatientProfile } from '@/constants/mock-data';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
-import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
+'use client';
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { usePatient } from "@/context/patient-context";
+import { MessageSquare } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function AccountPage() {
-  const {
-    name,
-    profileImage,
-    currentWeek,
-    totalWeeks,
-    primaryDoctor,
-    primaryHospital,
-    pregnancyCount,
-    birthType,
-    currentMedications,
-    medicalConditions,
-    careProviders,
-    prescriptions,
-    labReports
-  } = mockPatientProfile;
+  const patient = usePatient();
+  const router = useRouter();
 
   return (
-    <div className="container mx-auto py-8 px-4">
-      <div className="grid gap-6 grid-cols-1 lg:grid-cols-3">
-        {/* Profile Overview */}
-        <Card className="lg:col-span-3">
-          <CardContent className="pt-6">
-            <div className="flex flex-col md:flex-row items-center gap-4">
-              <Avatar className="h-24 w-24">
-                <AvatarImage src={profileImage} alt={name} />
-                <AvatarFallback>{name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-              </Avatar>
-              <div className="text-center md:text-left">
-                <h1 className="text-2xl font-bold">{name}</h1>
-                <p className="text-muted-foreground mt-1">
-                  Week {currentWeek} of {totalWeeks}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+    <div className="container mx-auto p-4 space-y-6">
+      {/* Profile Section */}
+      <Card>
+        <CardContent className="flex items-center gap-4 p-6">
+          <Avatar className="h-20 w-20">
+            <AvatarImage src={patient.profileImage} alt={patient.name} />
+            <AvatarFallback>{patient.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+          </Avatar>
+          <div>
+            <h1 className="text-2xl font-bold">{patient.name}</h1>
+            <p className="text-muted-foreground">
+              Currently in Week {patient.pregnancyWeek} of {patient.totalWeeks}
+            </p>
+          </div>
+        </CardContent>
+      </Card>
 
-        {/* Primary Care Information */}
+      {/* Primary Care Info */}
+      <div className="grid gap-6 md:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Primary Care</CardTitle>
+            <CardTitle>Primary Doctor</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="flex justify-between items-center">
               <div>
-                <h3 className="font-semibold">Primary Doctor</h3>
-                <div className="flex items-center gap-2 mt-2">
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage src={primaryDoctor.profileImage} alt={primaryDoctor.name} />
-                    <AvatarFallback>{primaryDoctor.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p>{primaryDoctor.name}</p>
-                    <p className="text-sm text-muted-foreground">{primaryDoctor.specialty}</p>
-                  </div>
-                </div>
+                <p className="font-semibold">{patient.primaryDoctor.name}</p>
+                <p className="text-sm text-muted-foreground">{patient.primaryDoctor.specialty}</p>
               </div>
-              <div>
-                <h3 className="font-semibold">Primary Hospital</h3>
-                <p className="mt-2">{primaryHospital.name}</p>
-                <p className="text-sm text-muted-foreground">{primaryHospital.address}</p>
-              </div>
+              <Button size="sm" className="gap-2">
+                <MessageSquare className="h-4 w-4" />
+                Chat
+              </Button>
             </div>
           </CardContent>
         </Card>
 
-        {/* Additional Information */}
         <Card>
           <CardHeader>
-            <CardTitle>Additional Information</CardTitle>
+            <CardTitle>Primary Hospital</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-semibold">Pregnancy Details</h3>
-                <div className="mt-2 space-y-2">
-                  <p>Pregnancy Count: {pregnancyCount}</p>
-                  <p>Birth Type: {birthType}</p>
-                </div>
-              </div>
-              <div>
-                <h3 className="font-semibold">Current Medications</h3>
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {currentMedications.map((med, index) => (
-                    <Badge key={index} variant="secondary">{med}</Badge>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <h3 className="font-semibold">Medical Conditions</h3>
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {medicalConditions.map((condition, index) => (
-                    <Badge key={index} variant="outline">{condition}</Badge>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <p className="font-semibold">{patient.primaryHospital.name}</p>
+            <p className="text-sm text-muted-foreground">{patient.primaryHospital.location}</p>
           </CardContent>
         </Card>
+      </div>
 
-        {/* Care Providers */}
+      {/* Additional Info */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Additional Information</CardTitle>
+        </CardHeader>
+        <CardContent className="grid gap-6 md:grid-cols-2">
+          <div>
+            <h3 className="font-semibold mb-2">Pregnancy Details</h3>
+            <div className="space-y-1">
+              <p>Pregnancy Count: {patient.pregnancyCount}st Pregnancy</p>
+              <p>Birth Type: {patient.birthType.join(', ')}</p>
+            </div>
+          </div>
+          <div>
+            <h3 className="font-semibold mb-2">Medical Information</h3>
+            <div className="space-y-1">
+              <p>Current Medications: {patient.currentMedications.join(', ')}</p>
+              <p>Medical Conditions: {patient.medicalConditions.join(', ')}</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Care Providers */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Other Care Providers</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {patient.careProviders.map((provider) => (
+              <div key={provider.id} className="flex justify-between items-center">
+                <div>
+                  <p className="font-semibold">{provider.name}</p>
+                  <p className="text-sm text-muted-foreground">{provider.specialty}</p>
+                </div>
+                <Button size="sm" className="gap-2">
+                  <MessageSquare className="h-4 w-4" />
+                  Chat
+                </Button>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Summary Cards */}
+      <div className="grid gap-6 md:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Care Providers</CardTitle>
+            <CardTitle>My Prescriptions</CardTitle>
+            <CardDescription>
+              {patient.prescriptions.total} active prescriptions
+              <br />
+              Last updated: {new Date(patient.prescriptions.lastUpdated).toLocaleDateString()}
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              {careProviders.map((provider) => (
-                <div key={provider.id} className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Avatar className="h-8 w-8">
-                      <AvatarImage src={provider.profileImage} alt={provider.name} />
-                      <AvatarFallback>{provider.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p>{provider.name}</p>
-                      <p className="text-sm text-muted-foreground">{provider.specialty}</p>
-                    </div>
-                  </div>
-                  <Button size="sm" variant="outline">Chat</Button>
-                </div>
-              ))}
-            </div>
+            <Button onClick={() => router.push('/account/prescriptions')} className="w-full">
+              View All Prescriptions
+            </Button>
           </CardContent>
         </Card>
 
-        {/* Summary Cards */}
-        <Card className="lg:col-span-3">
-          <CardContent className="pt-6">
-            <div className="grid gap-6 grid-cols-1 md:grid-cols-2">
-              {/* Prescriptions Summary */}
-              <Link href="/account/prescriptions" className="block">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>My Prescriptions</CardTitle>
-                    <CardDescription>
-                      {prescriptions.length} active prescriptions
-                      {prescriptions.length > 0 && ` • Last updated ${prescriptions[0].date}`}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Button className="w-full">View All Prescriptions</Button>
-                  </CardContent>
-                </Card>
-              </Link>
-
-              {/* Lab Reports Summary */}
-              <Link href="/account/labs" className="block">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>My Lab Reports</CardTitle>
-                    <CardDescription>
-                      {labReports.length} reports uploaded
-                      {labReports.length > 0 && ` • Latest from ${labReports[0].date}`}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Button className="w-full">View Lab Reports</Button>
-                  </CardContent>
-                </Card>
-              </Link>
-            </div>
+        <Card>
+          <CardHeader>
+            <CardTitle>My Lab Reports</CardTitle>
+            <CardDescription>
+              {patient.labReports.total} reports uploaded
+              <br />
+              Last updated: {new Date(patient.labReports.lastUpdated).toLocaleDateString()}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button onClick={() => router.push('/account/labs')} className="w-full">
+              View Lab Reports
+            </Button>
           </CardContent>
         </Card>
       </div>
