@@ -21,6 +21,7 @@ import {
   LucideProps,
   LucideShoppingBag,
   MessageSquareText,
+  MessageSquareMore,
   Mail,
   Moon,
   MoreVertical,
@@ -75,5 +76,6 @@ export const Icons: Record<string, LucideIcon> = {
   chat: MessageSquareText,
   mail: Mail,
   patient: Contact,
-  lightbulb: Lightbulb
+  lightbulb: Lightbulb,
+  inbox: MessageSquareMore
 };

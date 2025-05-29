@@ -159,6 +159,14 @@ export const navItems: NavItem[] = [
     items: [] // No child items
   },
   {
+    title: 'Inbox',
+    url: '/inbox',
+    icon: 'inbox',
+    shortcut: ['i', 'i'],
+    isActive: false,
+    items: [] // No child items
+  },
+  {
     title: 'Support Staff',
     url: '/dashboard/employee',
     icon: 'user',
