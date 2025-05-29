@@ -6,8 +6,8 @@ import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
 
 export const metadata: Metadata = {
-  title: 'Support Team - CareCircle',
-  description: 'Support Team Dashboard'
+  title: 'Pregnancy Dashboard - CareCircle',
+  description: 'Track your pregnancy journey'
 };
 
 export default function DashboardLayout({
@@ -18,15 +18,16 @@ export default function DashboardLayout({
   // Persisting the sidebar state in the cookie.
   const cookieStore = cookies();
   const defaultOpen = cookieStore.get('sidebar:state')?.value === 'true';
+
   return (
     <KBar>
       <SidebarProvider defaultOpen={defaultOpen}>
         <AppSidebar />
         <SidebarInset>
           <Header />
-          {/* page main content */}
-          {children}
-          {/* page main content ends */}
+          <main className="flex-1">
+            {children}
+          </main>
         </SidebarInset>
       </SidebarProvider>
     </KBar>

@@ -1,4 +1,5 @@
 import { NavItem } from '@/types';
+import { LayoutDashboard, Calendar, MessageSquare, FileText, User } from 'lucide-react';
 
 export type User = {
   id: number;
@@ -144,25 +145,17 @@ export type ChatSession = {
 export const navItems: NavItem[] = [
   {
     title: 'Dashboard',
-    url: '/dashboard/overview',
+    url: '/dashboard',
     icon: 'dashboard',
     isActive: false,
     shortcut: ['d', 'd'],
     items: [] // Empty array as there are no child items for Dashboard
   },
   {
-    title: 'Recommendations',
-    url: '/dashboard/recommendations',
-    icon: 'lightbulb',
-    shortcut: ['r', 'r'],
-    isActive: false,
-    items: [] // No child items
-  },
-  {
-    title: 'Inbox',
-    url: '/dashboard/inbox',
+    title: 'Messages',
+    url: '/dashboard/messages',
     icon: 'inbox',
-    shortcut: ['i', 'i'],
+    shortcut: ['m', 'm'],
     isActive: false,
     items: [] // No child items
   }
@@ -205,4 +198,32 @@ export const navItems: NavItem[] = [
     items: [] // No child items
   }
   */
+];
+
+export const sidebarLinks = [
+  {
+    title: 'Dashboard',
+    url: '/dashboard',
+    icon: LayoutDashboard
+  },
+  {
+    title: 'Calendar',
+    url: '/dashboard/calendar',
+    icon: Calendar
+  },
+  {
+    title: 'Messages',
+    url: '/dashboard/messages',
+    icon: MessageSquare
+  },
+  {
+    title: 'Documents',
+    url: '/dashboard/documents',
+    icon: FileText
+  },
+  {
+    title: 'Profile',
+    url: '/dashboard/profile',
+    icon: User
+  }
 ];
