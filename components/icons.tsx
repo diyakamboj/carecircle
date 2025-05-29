@@ -14,6 +14,7 @@ import {
   Image,
   Laptop,
   LayoutDashboardIcon,
+  Lightbulb,
   Loader2,
   LogIn,
   LucideIcon,
@@ -73,5 +74,6 @@ export const Icons: Record<string, LucideIcon> = {
   check: Check,
   chat: MessageSquareText,
   mail: Mail,
-  patient: Contact
+  patient: Contact,
+  lightbulb: Lightbulb
 };

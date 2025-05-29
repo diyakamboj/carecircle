@@ -1,58 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { format, startOfWeek, addWeeks, parseISO } from 'date-fns';
+import { format, startOfWeek, addWeeks } from 'date-fns';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { RecommendationCard } from './RecommendationCard';
 import { RecommendationModal } from './RecommendationModal';
 import { type Recommendation } from './types';
-
-// Mock recommendations data
-const mockRecommendations: Recommendation[] = [
-  {
-    id: 'rec1',
-    weekStart: '2024-05-05',
-    title: 'Prenatal Yoga Basics',
-    type: 'video',
-    embedUrl: 'https://youtu.be/dQw4w9WgXcQ',
-    notes: 'A gentle yoga routine to ease lower-back pain.',
-    uploadedBy: { name: 'Dr. Emily Smith' }
-  },
-  {
-    id: 'rec2',
-    weekStart: '2024-05-05',
-    title: 'Healthy Pregnancy Nutrition',
-    type: 'article',
-    embedUrl: 'https://example.com/nutrition',
-    notes: 'Tips on balanced meals and key nutrients.',
-    uploadedBy: { name: 'Nurse Jamie Lee' }
-  },
-  {
-    id: 'rec3',
-    weekStart: '2024-05-12',
-    title: 'Relaxation Techniques',
-    type: 'audio',
-    embedUrl: 'https://example.com/audio/relaxation.mp3',
-    notes: 'Guided meditation for stress relief.',
-    uploadedBy: { name: 'Dr. Sarah Wilson' }
-  },
-  {
-    id: 'rec4',
-    weekStart: '2024-05-19',
-    title: 'Third Trimester Exercise Guide',
-    type: 'text',
-    embedUrl: '',
-    notes: 'Safe exercises for the final trimester.',
-    uploadedBy: { name: 'Dr. Michael Brown' }
-  }
-];
-
-interface WeeklyViewProps {
-  currentDate: Date;
-  onDateChange: (date: Date) => void;
-  pregnancyStartDate?: Date;
-}
+import { mockRecommendations } from './mockData';
 
 function getWeeksToShow(baseDate: Date): Date[] {
   const weeks: Date[] = [];
@@ -64,6 +19,12 @@ function getWeeksToShow(baseDate: Date): Date[] {
   }
   
   return weeks;
+}
+
+interface WeeklyViewProps {
+  currentDate: Date;
+  onDateChange: (date: Date) => void;
+  pregnancyStartDate?: Date;
 }
 
 export function WeeklyView({ 

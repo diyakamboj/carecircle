@@ -153,7 +153,7 @@ export const navItems: NavItem[] = [
   {
     title: 'Recommendations',
     url: '/dashboard/recommendations',
-    icon: 'mail',
+    icon: 'lightbulb',
     shortcut: ['r', 'r'],
     isActive: false,
     items: [] // No child items
