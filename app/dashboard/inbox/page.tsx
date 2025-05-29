@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { type Conversation } from "@/constants/mock-chat";
 import { Users } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ConversationList } from "./_components/conversation-list";
 import { MessageInput } from "./_components/message-input";
 import { MessageList } from "./_components/message-list";
@@ -13,13 +13,16 @@ import { toast } from "sonner";
 
 export default function InboxPage() {
   const { conversations, addMessage, markConversationAsRead } = useChat();
-  const [selectedConversation, setSelectedConversation] = useState<Conversation | null>(null);
+  const [selectedConversationId, setSelectedConversationId] = useState<string | null>(null);
+  const selectedConversation = selectedConversationId
+    ? conversations.find(c => c.id === selectedConversationId)
+    : null;
 
   useEffect(() => {
-    if (selectedConversation) {
-      markConversationAsRead(selectedConversation.id);
+    if (selectedConversationId) {
+      markConversationAsRead(selectedConversationId);
     }
-  }, [selectedConversation, markConversationAsRead]);
+  }, [selectedConversationId, markConversationAsRead]);
 
   function getInitials(name: string) {
     return name
@@ -29,31 +32,21 @@ export default function InboxPage() {
   }
 
   const handleSelectConversation = (conversation: Conversation) => {
-    setSelectedConversation(conversation);
-    // Find the updated conversation from our state
-    const updatedConversation = conversations.find(c => c.id === conversation.id);
-    if (updatedConversation) {
-      setSelectedConversation(updatedConversation);
-    }
+    setSelectedConversationId(conversation.id);
   };
 
   const handleSendMessage = (content: string) => {
-    if (!selectedConversation) return;
+    if (!selectedConversationId) return;
 
     try {
-      addMessage(selectedConversation.id, content);
-      // Update the selected conversation with the latest messages
-      const updatedConversation = conversations.find(c => c.id === selectedConversation.id);
-      if (updatedConversation) {
-        setSelectedConversation(updatedConversation);
-      }
+      addMessage(selectedConversationId, content);
     } catch (error) {
       toast.error("Failed to send message. Please try again.");
     }
   };
 
   const handleFileSelect = async (file: File) => {
-    if (!selectedConversation) return;
+    if (!selectedConversationId) return;
 
     try {
       // In a real app, you would:
@@ -62,16 +55,10 @@ export default function InboxPage() {
       // 3. Then send the message with the file URL
       const mockFileUrl = URL.createObjectURL(file);
       
-      addMessage(selectedConversation.id, file.name, 'file', {
+      addMessage(selectedConversationId, file.name, 'file', {
         fileUrl: mockFileUrl,
         fileName: file.name
       });
-
-      // Update the selected conversation with the latest messages
-      const updatedConversation = conversations.find(c => c.id === selectedConversation.id);
-      if (updatedConversation) {
-        setSelectedConversation(updatedConversation);
-      }
 
       toast.success("File uploaded successfully!");
     } catch (error) {
@@ -86,7 +73,7 @@ export default function InboxPage() {
         <Card className="h-full">
           <ConversationList
             conversations={conversations}
-            selectedId={selectedConversation?.id}
+            selectedId={selectedConversationId || undefined}
             onSelect={handleSelectConversation}
           />
         </Card>
@@ -133,12 +120,7 @@ export default function InboxPage() {
             </>
           ) : (
             <div className="flex h-full items-center justify-center">
-              <div className="text-center">
-                <h3 className="font-medium">No conversation selected</h3>
-                <p className="text-sm text-muted-foreground">
-                  Choose a conversation from the list to start messaging
-                </p>
-              </div>
+              <p className="text-muted-foreground">Select a conversation to start messaging</p>
             </div>
           )}
         </Card>
