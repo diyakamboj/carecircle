@@ -74,8 +74,8 @@ export function InboxContent() {
             </div>
           </div>
           <MessageList
-            messages={messages[selectedConversationId] || []}
-            participants={selectedConversation.participants}
+            messages={selectedConversationId ? messages[selectedConversationId] || [] : []}
+            participants={selectedConversation?.participants || []}
             currentUserId="current-user"
           />
           <MessageInput onSend={handleSend} />

@@ -160,33 +160,9 @@ export const navItems: NavItem[] = [
   },
   {
     title: 'Inbox',
-    url: '/inbox',
+    url: '/dashboard/inbox',
     icon: 'inbox',
     shortcut: ['i', 'i'],
-    isActive: false,
-    items: [] // No child items
-  },
-  {
-    title: 'Support Staff',
-    url: '/dashboard/employee',
-    icon: 'user',
-    shortcut: ['e', 'e'],
-    isActive: false,
-    items: [] // No child items
-  },
-  {
-    title: 'Patients',
-    url: '/dashboard/patient',
-    icon: 'patient',
-    shortcut: ['z', 'z'],
-    isActive: false,
-    items: [] // No child items
-  },
-  {
-    title: 'Chat Room',
-    url: '/dashboard/chat',
-    icon: 'chat',
-    shortcut: ['c', 'c'],
     isActive: false,
     items: [] // No child items
   }
