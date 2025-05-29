@@ -38,10 +38,7 @@ const mockRecommendations = [
 export default function RecommendationsPageWrapper() {
   return (
     <PageContainer>
-      <RecommendationsPage 
-        recommendations={mockRecommendations}
-        pregnancyStartDate={pregnancyStartDate}
-      />
+      <RecommendationsPage />
     </PageContainer>
   );
 } 
