@@ -152,10 +152,10 @@ export const navItems: NavItem[] = [
     items: [] // Empty array as there are no child items for Dashboard
   },
   {
-    title: 'Messages',
-    url: '/dashboard/messages',
+    title: 'Inbox',
+    url: '/dashboard/inbox',
     icon: 'inbox',
-    shortcut: ['m', 'm'],
+    shortcut: ['i', 'i'],
     isActive: false,
     items: [] // No child items
   }
@@ -212,8 +212,8 @@ export const sidebarLinks = [
     icon: Calendar
   },
   {
-    title: 'Messages',
-    url: '/dashboard/messages',
+    title: 'Inbox',
+    url: '/dashboard/inbox',
     icon: MessageSquare
   },
   {
@@ -222,8 +222,8 @@ export const sidebarLinks = [
     icon: FileText
   },
   {
-    title: 'Profile',
-    url: '/dashboard/profile',
+    title: 'My Account',
+    url: '/account',
     icon: User
   }
 ];

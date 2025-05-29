@@ -29,7 +29,7 @@ export const useGoogleLogin = () => {
     try {
       await signInWithPopup(auth, provider);
       toast.success('Signed In Successfully!');
-      router.push('/dashboard/overview');
+      router.push('/dashboard');
     } catch (error: any) {
       setError(error.message);
       toast.error(`Failed to sign in: ${error.message}`);
@@ -54,7 +54,7 @@ export const useGithubLogin = () => {
     try {
       await signInWithPopup(auth, provider);
       toast.success('Signed In Successfully!');
-      router.push('/dashboard/overview');
+      router.push('/dashboard');
     } catch (error: any) {
       setError(error.message);
       toast.error(`Failed to sign in: ${error.message}`);
@@ -78,7 +78,7 @@ export const useEmailPasswordLogin = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       toast.success('Signed In Successfully!');
-      router.push('/dashboard/overview');
+      router.push('/dashboard');
     } catch (error: any) {
       setError(error.message);
       toast.error(`Failed to sign in: ${error.message}`);

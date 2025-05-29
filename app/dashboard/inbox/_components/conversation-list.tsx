@@ -1,77 +1,84 @@
 'use client';
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { type Conversation } from "@/constants/mock-chat";
 import { cn } from "@/lib/utils";
 import { formatDistanceToNow } from "date-fns";
 import { Users } from "lucide-react";
-import { type Conversation } from "../types";
 
 interface ConversationListProps {
   conversations: Conversation[];
-  selectedId: string | null;
-  onSelect: (id: string) => void;
+  selectedId?: string;
+  onSelect: (conversation: Conversation) => void;
 }
 
 export function ConversationList({ conversations, selectedId, onSelect }: ConversationListProps) {
+  function getInitials(name: string) {
+    return name
+      .split(' ')
+      .map(n => n[0])
+      .join('');
+  }
+
+  function formatTimestamp(timestamp: string) {
+    return formatDistanceToNow(new Date(timestamp), { addSuffix: true });
+  }
+
+  const sortedConversations = [...conversations].sort((a, b) => {
+    if (!a.lastMessage || !b.lastMessage) return 0;
+    return new Date(b.lastMessage.timestamp).getTime() - new Date(a.lastMessage.timestamp).getTime();
+  });
+
   return (
-    <ScrollArea className="h-[calc(100vh-10rem)]">
-      <div className="flex flex-col gap-2 p-4">
-        {conversations.map((conversation) => (
-          <button
+    <div className="w-full h-full flex flex-col">
+      <div className="p-4 border-b">
+        <h2 className="font-semibold">Messages</h2>
+      </div>
+      <div className="flex-1 overflow-y-auto">
+        {sortedConversations.map((conversation) => (
+          <div
             key={conversation.id}
-            onClick={() => onSelect(conversation.id)}
             className={cn(
-              "flex items-start gap-3 rounded-lg p-3 text-left transition-colors hover:bg-accent",
+              "p-4 hover:bg-accent cursor-pointer flex items-center gap-3",
               selectedId === conversation.id && "bg-accent"
             )}
+            onClick={() => onSelect(conversation)}
           >
-            {conversation.type === 'group' ? (
-              <div className="relative">
-                <Avatar>
-                  <AvatarFallback>
-                    <Users className="h-4 w-4" />
-                  </AvatarFallback>
-                </Avatar>
-                <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] text-primary-foreground">
-                  {conversation.participants.length}
-                </span>
-              </div>
-            ) : (
+            {conversation.type === 'individual' ? (
               <Avatar>
-                <AvatarImage src={conversation.avatarUrl} />
-                <AvatarFallback>
-                  {conversation.name.split(' ').map(n => n[0]).join('')}
-                </AvatarFallback>
+                <AvatarImage src={conversation.avatar} alt={conversation.name} />
+                <AvatarFallback>{getInitials(conversation.name)}</AvatarFallback>
               </Avatar>
+            ) : (
+              <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground">
+                <Users className="h-5 w-5" />
+              </div>
             )}
-            <div className="flex-1 overflow-hidden">
-              <div className="flex items-center justify-between gap-2">
-                <p className="truncate font-medium">
-                  {conversation.name}
-                </p>
+            <div className="flex-1 min-w-0">
+              <div className="flex justify-between items-start">
+                <p className="font-medium truncate">{conversation.name}</p>
                 {conversation.lastMessage && (
-                  <p className="whitespace-nowrap text-xs text-muted-foreground">
-                    {formatDistanceToNow(new Date(conversation.lastMessage.timestamp), { addSuffix: true })}
-                  </p>
+                  <span className="text-xs text-muted-foreground">
+                    {formatTimestamp(conversation.lastMessage.timestamp)}
+                  </span>
                 )}
               </div>
               {conversation.lastMessage && (
-                <p className="truncate text-sm text-muted-foreground">
-                  {conversation.lastMessage.content}
+                <p className="text-sm text-muted-foreground truncate">
+                  {conversation.lastMessage.type === 'file' 
+                    ? `📎 ${conversation.lastMessage.fileName}`
+                    : conversation.lastMessage.content}
                 </p>
               )}
-              {conversation.unreadCount > 0 && (
-                <div className="mt-1 flex items-center gap-2">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
-                    {conversation.unreadCount}
-                  </span>
-                </div>
-              )}
             </div>
-          </button>
+            {conversation.unreadCount > 0 && (
+              <div className="bg-primary text-primary-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                {conversation.unreadCount}
+              </div>
+            )}
+          </div>
         ))}
       </div>
-    </ScrollArea>
+    </div>
   );
 } 
